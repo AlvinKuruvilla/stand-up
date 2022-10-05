@@ -1,17 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Pages/Login/register_page.dart';
 
-class LoginPage extends StatefulWidget {
-  static String tag = 'login-page';
+class RegisterPage extends StatefulWidget {
+  static String tag = 'register-page';
 
-  const LoginPage({super.key});
+  const RegisterPage({super.key});
   @override
-  _LoginPageState createState() => _LoginPageState();
+  _RegisterPageState createState() => _RegisterPageState();
 }
 
-class _LoginPageState extends State<LoginPage> {
+class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
+    final name = TextFormField(
+      keyboardType: TextInputType.emailAddress,
+      autofocus: false,
+      decoration: InputDecoration(
+        hintText: 'Name',
+        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
+        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
+      ),
+    );
     final email = TextFormField(
       keyboardType: TextInputType.emailAddress,
       autofocus: false,
@@ -44,23 +52,9 @@ class _LoginPageState extends State<LoginPage> {
             borderRadius: BorderRadius.circular(24),
           ),
         ),
-        child: const Text("Login", style: TextStyle(color: Colors.white)),
+        child: const Text("Register", style: TextStyle(color: Colors.white)),
       ),
     );
-
-    final forgotLabel = TextButton(
-      child: const Text(
-        "Don't have an account? Sign up here",
-        style: TextStyle(color: Colors.black54),
-      ),
-      onPressed: () {
-        Navigator.push(
-          context,
-          MaterialPageRoute(builder: (context) => const RegisterPage()),
-        );
-      },
-    );
-
     return Scaffold(
       backgroundColor: Colors.white,
       body: Center(
@@ -68,13 +62,14 @@ class _LoginPageState extends State<LoginPage> {
           shrinkWrap: true,
           padding: const EdgeInsets.only(left: 24.0, right: 24.0),
           children: <Widget>[
+            const SizedBox(height: 8.0),
+            name,
             const SizedBox(height: 48.0),
             email,
             const SizedBox(height: 8.0),
             password,
             const SizedBox(height: 24.0),
             loginButton,
-            forgotLabel
           ],
         ),
       ),
