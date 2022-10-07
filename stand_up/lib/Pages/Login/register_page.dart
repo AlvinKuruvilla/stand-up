@@ -1,78 +1,111 @@
 import 'package:flutter/material.dart';
 
-class RegisterPage extends StatefulWidget {
-  static String tag = 'register-page';
-
+class RegisterPage extends StatelessWidget {
   const RegisterPage({super.key});
-  @override
-  _RegisterPageState createState() => _RegisterPageState();
-}
 
-class _RegisterPageState extends State<RegisterPage> {
   @override
   Widget build(BuildContext context) {
-    final name = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      decoration: InputDecoration(
-        hintText: 'Name',
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-    final email = TextFormField(
-      keyboardType: TextInputType.emailAddress,
-      autofocus: false,
-      decoration: InputDecoration(
-        hintText: 'Email',
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final password = TextFormField(
-      autofocus: false,
-      obscureText: true,
-      decoration: InputDecoration(
-        hintText: 'Password',
-        contentPadding: const EdgeInsets.fromLTRB(20.0, 10.0, 20.0, 10.0),
-        border: OutlineInputBorder(borderRadius: BorderRadius.circular(32.0)),
-      ),
-    );
-
-    final loginButton = Padding(
-      padding: const EdgeInsets.symmetric(vertical: 16.0),
-      child: ElevatedButton(
-        onPressed: () {
-          // Navigator.of(context).pushNamed(HomePage.tag);
-        },
-        style: ElevatedButton.styleFrom(
-          padding: const EdgeInsets.all(12),
-          shape: RoundedRectangleBorder(
-            borderRadius: BorderRadius.circular(24),
+    return SafeArea(
+      child: Scaffold(
+        body: Container(
+          margin: const EdgeInsets.all(24),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              _header(context),
+              _inputField(context),
+              _signin(context),
+            ],
           ),
         ),
-        child: const Text("Register", style: TextStyle(color: Colors.white)),
       ),
     );
-    return Scaffold(
-      backgroundColor: Colors.white,
-      body: Center(
-        child: ListView(
-          shrinkWrap: true,
-          padding: const EdgeInsets.only(left: 24.0, right: 24.0),
-          children: <Widget>[
-            const SizedBox(height: 8.0),
-            name,
-            const SizedBox(height: 48.0),
-            email,
-            const SizedBox(height: 8.0),
-            password,
-            const SizedBox(height: 24.0),
-            loginButton,
+  }
+
+  _header(context) {
+    return Column(
+      children: [
+        Row(
+          children: const [
+            Expanded(
+              child: Text(
+                "Welcome to Standup",
+                style: TextStyle(fontSize: 40, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            )
           ],
         ),
-      ),
+        const Text("Create an account to login"),
+      ],
+    );
+  }
+
+  _inputField(context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.stretch,
+      children: [
+        TextField(
+          decoration: InputDecoration(
+              hintText: "Email",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none),
+              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+              filled: true,
+              prefixIcon: const Icon(Icons.email)),
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+              hintText: "Username",
+              border: OutlineInputBorder(
+                  borderRadius: BorderRadius.circular(18),
+                  borderSide: BorderSide.none),
+              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+              filled: true,
+              prefixIcon: const Icon(Icons.person)),
+        ),
+        const SizedBox(height: 10),
+        TextField(
+          decoration: InputDecoration(
+            hintText: "Password",
+            border: OutlineInputBorder(
+                borderRadius: BorderRadius.circular(18),
+                borderSide: BorderSide.none),
+            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+            filled: true,
+            prefixIcon: const Icon(Icons.lock),
+          ),
+          obscureText: true,
+        ),
+        const SizedBox(height: 10),
+        ElevatedButton(
+          onPressed: () {},
+          style: ElevatedButton.styleFrom(
+            shape: const StadiumBorder(),
+            padding: const EdgeInsets.symmetric(vertical: 16),
+          ),
+          child: const Text(
+            "Sign Up",
+            style: TextStyle(fontSize: 20),
+          ),
+        )
+      ],
+    );
+  }
+
+  _signin(context) {
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.center,
+      children: [
+        const Text("Already have an account? "),
+        TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: const Text("Sign In"))
+      ],
     );
   }
 }
