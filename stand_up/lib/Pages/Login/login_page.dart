@@ -66,8 +66,8 @@ class LoginPage extends StatelessWidget {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-                context, MaterialPageRoute(builder: (context) => TimerPage()));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const TimerPage()));
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),

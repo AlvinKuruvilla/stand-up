@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'dart:math';
 
+// TODO: Show timer progress as it gets closer to zero
+
 class TimerPainter extends CustomPainter {
   final Animation<double> animation;
   final Color backgroundColor, color;
@@ -18,8 +20,8 @@ class TimerPainter extends CustomPainter {
       ..strokeWidth = 8.0
       ..strokeCap = StrokeCap.butt
       ..style = PaintingStyle.stroke;
-
-    canvas.drawCircle(size.center(Offset.zero), size.width / 2.0, paint);
+    // the old value was 2.0 instead of 5.0
+    canvas.drawCircle(size.center(Offset.zero), size.width / 5.0, paint);
     paint.color = color;
     double progress = (1.0 - animation.value) * 2 * pi;
     canvas.drawArc(Offset.zero & size, pi * 1.5, progress, false, paint);
