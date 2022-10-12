@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:stand_up/Pages/Login/register_page.dart';
+import 'package:stand_up/Pages/Timer/timer_page.dart';
 
 class LoginPage extends StatelessWidget {
   const LoginPage({super.key});
@@ -64,7 +65,10 @@ class LoginPage extends StatelessWidget {
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {},
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => TimerPage()));
+          },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
             padding: const EdgeInsets.symmetric(vertical: 16),
