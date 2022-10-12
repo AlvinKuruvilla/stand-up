@@ -60,10 +60,6 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    final Brightness brightnessValue =
-        MediaQuery.of(context).platformBrightness;
-    bool isDark = brightnessValue == Brightness.dark;
-
     integerNumberPicker = NumberPicker(
       value: _workSessionValue,
       minValue: 1,
@@ -86,9 +82,7 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
     );
 
     return Scaffold(
-        backgroundColor: (isDark)
-            ? const Color.fromRGBO(38, 38, 52, 1)
-            : const Color.fromRGBO(242, 62, 60, 1),
+        backgroundColor: const Color.fromRGBO(38, 38, 52, 1),
         body: AnimatedBuilder(
             animation: animationController,
             builder: (context, child) {
@@ -111,15 +105,11 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
                                     builder:
                                         (BuildContext context, Widget? child) {
                                       return CustomPaint(
-                                        painter: TimerPainter(
-                                            animation: animationController,
-                                            backgroundColor: Colors.white,
-                                            color: (isDark)
-                                                ? const Color.fromRGBO(
-                                                    92, 211, 62, 1)
-                                                : const Color.fromRGBO(
-                                                    175, 8, 8, 1)),
-                                      );
+                                          painter: TimerPainter(
+                                              animation: animationController,
+                                              backgroundColor: Colors.white,
+                                              color: const Color.fromRGBO(
+                                                  92, 211, 62, 1)));
                                     }),
                               ),
                               Align(
@@ -206,14 +196,12 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
                                 shape: const CircleBorder(),
                                 elevation: 1.0,
                                 child: Icon(
-                                  (animationController.isAnimating)
-                                      ? CupertinoIcons.pause_solid
-                                      : CupertinoIcons.play_arrow_solid,
-                                  size: 48,
-                                  color: (isDark)
-                                      ? const Color.fromRGBO(92, 211, 62, 1)
-                                      : const Color.fromRGBO(242, 60, 62, 1),
-                                ),
+                                    (animationController.isAnimating)
+                                        ? CupertinoIcons.pause_solid
+                                        : CupertinoIcons.play_arrow_solid,
+                                    size: 48,
+                                    color:
+                                        const Color.fromRGBO(92, 211, 62, 1)),
                                 onPressed: () {
                                   if (animationController.isAnimating) {
                                     animationController.stop();
@@ -248,11 +236,9 @@ class _TimerPageState extends State<TimerPage> with TickerProviderStateMixin {
               elevation: 0.0,
               backgroundColor: Colors.white,
               onPressed: () {},
-              child: Icon(
+              child: const Icon(
                 CupertinoIcons.settings_solid,
-                color: (isDark)
-                    ? const Color.fromRGBO(92, 211, 62, 1)
-                    : const Color.fromRGBO(242, 62, 60, 1),
+                color: Color.fromRGBO(92, 211, 62, 1),
                 size: 32,
               ),
             ),
