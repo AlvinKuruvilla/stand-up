@@ -21,3 +21,7 @@ doc/api/
 *.js.map
 
 notes.txt
+
+env
+__pycache__
+database.db
