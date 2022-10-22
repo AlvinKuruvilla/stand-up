@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/animated_clock.dart';
 import 'package:stand_up/Widgets/in_progress.dart';
 
@@ -44,12 +45,10 @@ class _TimerPageState extends State<TimerPage> {
               ),
               ListTile(
                 leading: const Icon(Icons.settings),
-                title: const Text("Timer Settings"),
+                title: const Text("Settings"),
                 onTap: () {
-                  Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const InProgressPage()));
+                  Navigator.push(context,
+                      MaterialPageRoute(builder: (context) => SettingsPage()));
                 },
               )
             ],
