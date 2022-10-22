@@ -47,7 +47,7 @@ class _TimerPageState extends State<TimerPage> {
           ),
         ),
         backgroundColor: Colors.white,
-        body: const AnimatedClock(),
+        body: const CountDownTimer(),
         floatingActionButton: Container(
           padding: const EdgeInsets.only(top: 40),
           child: Align(
