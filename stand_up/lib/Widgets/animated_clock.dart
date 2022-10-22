@@ -69,7 +69,7 @@ class _CountDownTimerState extends State<CountDownTimer>
                                       Text(
                                         timerString,
                                         style: const TextStyle(
-                                            fontSize: 112.0,
+                                            fontSize: 90.0,
                                             color: Colors.black),
                                       ),
                                     ],
