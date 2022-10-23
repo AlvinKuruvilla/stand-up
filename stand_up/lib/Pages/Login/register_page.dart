@@ -1,9 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
 
-class RegisterPage extends StatelessWidget {
+class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
+  @override
+  _RegisterPageState createState() => _RegisterPageState();
+}
+
+class _RegisterPageState extends State<RegisterPage> {
+  @override
   @override
   Widget build(BuildContext context) {
     return SafeArea(
