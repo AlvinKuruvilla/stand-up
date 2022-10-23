@@ -58,7 +58,7 @@ def get_user_by_id(user_id):
     except:
         user = {}
 
-    return 
+    return user
 
 
 def get_user_by_email(email):
@@ -78,4 +78,28 @@ def get_user_by_email(email):
     except:
         user = {}
 
-    return 
+    return user
+
+
+def get_users():
+    users = []
+    try:
+        conn = connect_to_db()
+        conn.row_factory = sqlite3.Row
+        cur = conn.cursor()
+        cur.execute("SELECT * FROM users")
+        rows = cur.fetchall()
+
+        # convert row objects to dictionary
+        for i in rows:
+            user = {}
+            user["id"] = i["id"]
+            user["username"] = i["username"]
+            user["email"] = i["email"]
+            user["pass"] = i["pass"]
+            users.append(user)
+
+    except:
+        users = []
+
+    return users
