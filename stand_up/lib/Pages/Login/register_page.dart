@@ -1,10 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
 
 class RegisterPage extends StatefulWidget {
-  UserAccount user;
-  RegisterPage({super.key, required this.user});
+  const RegisterPage({super.key});
 
   @override
   _RegisterPageState createState() => _RegisterPageState();
@@ -90,10 +88,8 @@ class _RegisterPageState extends State<RegisterPage> {
         const SizedBox(height: 10),
         ElevatedButton(
           onPressed: () {
-            Navigator.push(
-                context,
-                MaterialPageRoute(
-                    builder: (context) => TimerPage(user: widget.user)));
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => const TimerPage()));
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),

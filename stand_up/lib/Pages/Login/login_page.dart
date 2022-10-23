@@ -5,8 +5,7 @@ import 'package:stand_up/Pages/Timer/timer_page.dart';
 import 'package:stand_up/Services/auth_api.dart';
 
 class LoginPage extends StatefulWidget {
-  UserAccount user;
-  LoginPage({super.key, required this.user});
+  const LoginPage({super.key});
   @override
   _LoginPageState createState() => _LoginPageState();
 }
@@ -84,10 +83,8 @@ class _LoginPageState extends State<LoginPage> {
                 print(req.body);
                 var account = UserAccount.fromRequestBody(req.body);
                 account.printAttributes();
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => TimerPage(user: account)));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => const TimerPage()));
               } else {
                 // pushError(context);
               }
@@ -116,10 +113,8 @@ class _LoginPageState extends State<LoginPage> {
         const Text("Dont have an account? "),
         TextButton(
             onPressed: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => RegisterPage(user: widget.user)));
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => RegisterPage()));
             },
             child: const Text("Sign Up"))
       ],

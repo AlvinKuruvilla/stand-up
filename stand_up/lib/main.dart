@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Login/login_page.dart';
 
 void main() {
-  UserAccount user;
-  runApp(MyApp(
-    user: user,
-  ));
+  runApp(const MyApp());
 }
 
 class MyApp extends StatefulWidget {
-  final UserAccount user;
-  const MyApp({super.key, required this.user});
+  const MyApp({super.key});
 
   @override
   _MyAppState createState() => _MyAppState();
@@ -20,8 +15,8 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      home: LoginPage(user: widget.user),
+    return const MaterialApp(
+      home: LoginPage(),
     );
   }
 }

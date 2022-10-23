@@ -5,8 +5,7 @@ import 'package:stand_up/Widgets/animated_clock.dart';
 import 'package:stand_up/Widgets/in_progress.dart';
 
 class TimerPage extends StatefulWidget {
-  UserAccount user;
-  TimerPage({super.key, required this.user});
+  const TimerPage({super.key});
 
   @override
   _TimerPageState createState() => _TimerPageState();
@@ -32,9 +31,7 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InProgressPage(
-                                user: widget.user,
-                              )));
+                          builder: (context) => InProgressPage()));
                 },
               ),
               ListTile(
@@ -44,8 +41,7 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) =>
-                              InProgressPage(user: widget.user)));
+                          builder: (context) => InProgressPage()));
                 },
               ),
               ListTile(

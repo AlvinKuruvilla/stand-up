@@ -1,15 +1,18 @@
 import 'dart:convert';
 
 class UserAccount {
-  int id;
-  String email;
-  String username;
-  UserAccount({required this.id, required this.email, required this.username});
+  late int id;
+  late String email;
+  late String username;
+  static final UserAccount _account = UserAccount();
 
+  factory UserAccount() {
+    return _account;
+  }
+  UserAccount.instantiate(this.id, this.email, this.username);
   factory UserAccount.fromRequestBody(String body) {
     Map<String, dynamic> json = jsonDecode(body);
-    return UserAccount(
-        id: json['id'], email: json["email"], username: json['username']);
+    return UserAccount.instantiate(json['id'], json["email"], json['username']);
   }
   void printAttributes() {
     print("id: $id\n");

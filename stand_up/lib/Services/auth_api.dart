@@ -14,7 +14,7 @@ class AuthAPI extends BaseAPI {
       }
     });
 
-    http.Response response = await http.post(Uri.parse(super.customersPath),
+    http.Response response = await http.post(Uri.parse(super.allUsers),
         headers: super.headers, body: body);
     return response;
   }
