@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/animated_clock.dart';
 import 'package:stand_up/Widgets/in_progress.dart';
 
 class TimerPage extends StatefulWidget {
-  const TimerPage({super.key});
+  UserAccount user;
+  TimerPage({super.key, required this.user});
 
   @override
   _TimerPageState createState() => _TimerPageState();
@@ -30,7 +32,9 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const InProgressPage()));
+                          builder: (context) => InProgressPage(
+                                user: widget.user,
+                              )));
                 },
               ),
               ListTile(
@@ -40,15 +44,18 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const InProgressPage()));
+                          builder: (context) =>
+                              InProgressPage(user: widget.user)));
                 },
               ),
               ListTile(
                 leading: const Icon(Icons.settings),
                 title: const Text("Settings"),
                 onTap: () {
-                  Navigator.push(context,
-                      MaterialPageRoute(builder: (context) => SettingsPage()));
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const SettingsPage()));
                 },
               )
             ],

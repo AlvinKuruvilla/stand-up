@@ -1,14 +1,20 @@
 import 'package:flutter/material.dart';
+import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Login/register_page.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
+import 'package:stand_up/Services/auth_api.dart';
 
 class LoginPage extends StatefulWidget {
-  const LoginPage({super.key});
+  UserAccount user;
+  LoginPage({super.key, required this.user});
   @override
   _LoginPageState createState() => _LoginPageState();
 }
 
 class _LoginPageState extends State<LoginPage> {
+  final AuthAPI _authAPI = AuthAPI();
+  String email = "";
+  String password = "";
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -53,6 +59,7 @@ class _LoginPageState extends State<LoginPage> {
               fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
               filled: true,
               prefixIcon: const Icon(Icons.person)),
+          onChanged: (value) => setState(() => email = value),
         ),
         const SizedBox(height: 10),
         TextField(
@@ -66,12 +73,28 @@ class _LoginPageState extends State<LoginPage> {
             prefixIcon: const Icon(Icons.lock),
           ),
           obscureText: true,
+          onChanged: (value) => setState(() => password = value),
         ),
         const SizedBox(height: 10),
         ElevatedButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const TimerPage()));
+          onPressed: () async {
+            try {
+              var req = await _authAPI.login(email, password);
+              if (req.statusCode == 200) {
+                print(req.body);
+                var account = UserAccount.fromRequestBody(req.body);
+                account.printAttributes();
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => TimerPage(user: account)));
+              } else {
+                // pushError(context);
+              }
+            } on Exception catch (e) {
+              print(e.toString());
+              // pushError(context);
+            }
           },
           style: ElevatedButton.styleFrom(
             shape: const StadiumBorder(),
@@ -96,7 +119,7 @@ class _LoginPageState extends State<LoginPage> {
               Navigator.push(
                   context,
                   MaterialPageRoute(
-                      builder: (context) => const RegisterPage()));
+                      builder: (context) => RegisterPage(user: widget.user)));
             },
             child: const Text("Sign Up"))
       ],

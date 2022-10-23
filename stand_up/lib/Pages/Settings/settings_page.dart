@@ -4,7 +4,7 @@ import 'package:stand_up/Widgets/hierarchy_button.dart';
 import 'package:stand_up/Widgets/settings_group.dart';
 
 class SettingsPage extends StatefulWidget {
-  SettingsPage();
+  const SettingsPage({super.key});
 
   @override
   SettingsPageState createState() => SettingsPageState();
