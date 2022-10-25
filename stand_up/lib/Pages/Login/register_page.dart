@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
+import 'package:stand_up/Services/auth_api.dart';
 
 class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
@@ -9,6 +11,12 @@ class RegisterPage extends StatefulWidget {
 }
 
 class _RegisterPageState extends State<RegisterPage> {
+  final AuthAPI _authAPI = AuthAPI();
+  final key = GlobalKey<FormState>();
+  String email = "";
+  String username = "";
+  String password = "";
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -48,59 +56,100 @@ class _RegisterPageState extends State<RegisterPage> {
   }
 
   _inputField(context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.stretch,
-      children: [
-        TextField(
-          decoration: InputDecoration(
-              hintText: "Email",
+    return Form(
+      key: key,
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          TextFormField(
+            decoration: InputDecoration(
+                hintText: "Email",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    borderSide: BorderSide.none),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.email)),
+            onChanged: (value) => setState(() => email = value),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "This field is required";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            decoration: InputDecoration(
+                hintText: "Username",
+                border: OutlineInputBorder(
+                    borderRadius: BorderRadius.circular(18),
+                    borderSide: BorderSide.none),
+                fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
+                filled: true,
+                prefixIcon: const Icon(Icons.person)),
+            onChanged: (value) => setState(() => username = value),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "This field is required";
+              }
+              return null;
+            },
+          ),
+          const SizedBox(height: 10),
+          TextFormField(
+            decoration: InputDecoration(
+              hintText: "Password",
               border: OutlineInputBorder(
                   borderRadius: BorderRadius.circular(18),
                   borderSide: BorderSide.none),
               fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
               filled: true,
-              prefixIcon: const Icon(Icons.email)),
-        ),
-        const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-              hintText: "Username",
-              border: OutlineInputBorder(
-                  borderRadius: BorderRadius.circular(18),
-                  borderSide: BorderSide.none),
-              fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-              filled: true,
-              prefixIcon: const Icon(Icons.person)),
-        ),
-        const SizedBox(height: 10),
-        TextField(
-          decoration: InputDecoration(
-            hintText: "Password",
-            border: OutlineInputBorder(
-                borderRadius: BorderRadius.circular(18),
-                borderSide: BorderSide.none),
-            fillColor: Theme.of(context).primaryColor.withOpacity(0.1),
-            filled: true,
-            prefixIcon: const Icon(Icons.lock),
+              prefixIcon: const Icon(Icons.lock),
+            ),
+            obscureText: true,
+            onChanged: (value) => setState(() => password = value),
+            validator: (value) {
+              if (value == null || value.isEmpty) {
+                return "This field is required";
+              }
+              return null;
+            },
           ),
-          obscureText: true,
-        ),
-        const SizedBox(height: 10),
-        ElevatedButton(
-          onPressed: () {
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => const TimerPage()));
-          },
-          style: ElevatedButton.styleFrom(
-            shape: const StadiumBorder(),
-            padding: const EdgeInsets.symmetric(vertical: 16),
-          ),
-          child: const Text(
-            "Sign Up",
-            style: TextStyle(fontSize: 20),
-          ),
-        )
-      ],
+          const SizedBox(height: 10),
+          ElevatedButton(
+            onPressed: () async {
+              if (key.currentState!.validate()) {
+                try {
+                  var req = await _authAPI.signUp(email, password, username);
+                  if (req.statusCode == 200) {
+                    print(req.body);
+                    var account = UserAccount.fromRequestBody(req.body);
+                    account.printAttributes();
+                    Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (context) => const TimerPage()));
+                  } else {
+                    // pushError(context);
+                  }
+                } on Exception catch (e) {
+                  print(e.toString());
+                  // pushError(context);
+                }
+              }
+            },
+            style: ElevatedButton.styleFrom(
+              shape: const StadiumBorder(),
+              padding: const EdgeInsets.symmetric(vertical: 16),
+            ),
+            child: const Text(
+              "Sign Up",
+              style: TextStyle(fontSize: 20),
+            ),
+          )
+        ],
+      ),
     );
   }
 

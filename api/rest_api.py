@@ -6,7 +6,7 @@ users = []
 test_user = {
     "username": "jdoe",
     "email": "johndoe@gamil.com",
-    "pass": "Test123!",
+    "password": "Test123!",
 }
 users.append(test_user)
 create_db_table()

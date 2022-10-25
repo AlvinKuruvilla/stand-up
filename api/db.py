@@ -12,7 +12,7 @@ def create_db_table():
                 id INTEGER PRIMARY KEY AUTOINCREMENT,
                 username TEXT NOT NULL,
                 email TEXT NOT NULL,
-                pass TEXT NOT NULL
+                password TEXT NOT NULL
             );
         ''')
 
@@ -25,11 +25,13 @@ def create_db_table():
 
 
 def insert_user(user):
+    print(user)
+    print(type(user))
     inserted_user = {}
     try:
         conn = connect_to_db()
         cur = conn.cursor()
-        cur.execute("INSERT INTO users (username, email, pass) VALUES (?, ?, ?)", (user['username'], user['email'], user['pass']) )
+        cur.execute("INSERT INTO users (username, email, password) VALUES (?, ?, ?)", (user['username'], user['email'], user['password']) )
         conn.commit()
         inserted_user = get_user_by_id(cur.lastrowid)
     except:
@@ -37,7 +39,7 @@ def insert_user(user):
 
     finally:
         conn.close()
-
+    print("Inserted user:", inserted_user)
     return inserted_user
 
 
@@ -54,8 +56,10 @@ def get_user_by_id(user_id):
         user["id"] = row["id"]
         user["username"] = row["username"]
         user["email"] = row["email"]
-        user["pass"] = row["pass"]
-    except:
+        user["password"] = row["password"]
+    except Exception as e:
+        print("Hit exception when returning user")
+        print(e)
         user = {}
 
     return user
@@ -74,8 +78,10 @@ def get_user_by_email(email):
         user["id"] = row["id"]
         user["username"] = row["username"]
         user["email"] = row["email"]
-        user["pass"] = row["pass"]
-    except:
+        user["password"] = row["password"]
+    except Exception as e:
+        print("Hit exception when returning user")
+        print(e)
         user = {}
 
     return user
@@ -96,7 +102,7 @@ def get_users():
             user["id"] = i["id"]
             user["username"] = i["username"]
             user["email"] = i["email"]
-            user["pass"] = i["pass"]
+            user["password"] = i["password"]
             users.append(user)
 
     except:
