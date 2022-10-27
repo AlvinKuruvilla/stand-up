@@ -6,6 +6,7 @@ class InProgressPage extends StatefulWidget {
   const InProgressPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _InProgressPageState createState() => _InProgressPageState();
 }
 

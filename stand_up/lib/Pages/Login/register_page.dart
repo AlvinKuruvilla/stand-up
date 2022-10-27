@@ -7,6 +7,7 @@ class RegisterPage extends StatefulWidget {
   const RegisterPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _RegisterPageState createState() => _RegisterPageState();
 }
 
@@ -123,7 +124,7 @@ class _RegisterPageState extends State<RegisterPage> {
                 try {
                   var req = await _authAPI.signUp(email, password, username);
                   if (req.statusCode == 200) {
-                    print(req.body);
+                    // print(req.body);
                     var account = UserAccount.fromRequestBody(req.body);
                     account.printAttributes();
                     Navigator.push(
@@ -133,9 +134,9 @@ class _RegisterPageState extends State<RegisterPage> {
                   } else {
                     // pushError(context);
                   }
+                  // ignore: unused_catch_clause
                 } on Exception catch (e) {
-                  print(e.toString());
-                  // pushError(context);
+                  // print(e.toString());
                 }
               }
             },

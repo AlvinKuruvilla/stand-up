@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/animated_clock.dart';
 import 'package:stand_up/Widgets/in_progress.dart';
@@ -8,6 +7,7 @@ class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _TimerPageState createState() => _TimerPageState();
 }
 

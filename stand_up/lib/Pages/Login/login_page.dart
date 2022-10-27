@@ -7,6 +7,7 @@ import 'package:stand_up/Services/auth_api.dart';
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
   @override
+  // ignore: library_private_types_in_public_api
   _LoginPageState createState() => _LoginPageState();
 }
 
@@ -98,7 +99,7 @@ class _LoginPageState extends State<LoginPage> {
                     var found = ret[0];
                     var username = ret[1];
                     // print(req.body);
-                    print("User found:$found");
+                    // print("User found:$found");
                     if (found) {
                       var account =
                           UserAccount.instantiate(email, username, password);
@@ -107,12 +108,10 @@ class _LoginPageState extends State<LoginPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const TimerPage()));
-                    } else {
-                      // pushError(context);
-                    }
+                    } else {}
+                    // ignore: unused_catch_clause
                   } on Exception catch (e) {
-                    print(e.toString());
-                    // pushError(context);
+                    // print(e.toString());
                   }
                 }
               },

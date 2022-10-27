@@ -6,6 +6,7 @@ class NotificationsPage extends StatefulWidget {
   const NotificationsPage({super.key});
 
   @override
+  // ignore: library_private_types_in_public_api
   _NotificationsPageState createState() => _NotificationsPageState();
 }
 
@@ -47,9 +48,10 @@ class _NotificationsPageState extends State<NotificationsPage> {
               ),
               child: Column(
                 children: <Widget>[
-                  SettingOption("Tagging Notifications", Colors.black),
+                  const SettingOption("Tagging Notifications", Colors.black),
                   buildDivider(),
-                  SettingOption("New Connection Notification", Colors.black),
+                  const SettingOption(
+                      "New Connection Notification", Colors.black),
                   buildDivider(),
                 ],
               ),

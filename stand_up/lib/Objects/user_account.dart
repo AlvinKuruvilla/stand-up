@@ -18,14 +18,14 @@ class UserAccount {
   }
   factory UserAccount.fromRequestBody(String body) {
     final Map json = jsonDecode(body);
-    print("Decoded Body:" + json.toString());
+    // print("Decoded Body:" + json.toString());
 
     return UserAccount.instantiate(
         json["email"], json['username'], json["password"]);
   }
   void printAttributes() {
-    print("email: $email\n");
-    print("username: $username\n");
-    print("password:$password\n");
+    // print("email: $email\n");
+    // print("username: $username\n");
+    // print("password:$password\n");
   }
 }

@@ -1,10 +1,9 @@
 import 'package:flutter/material.dart';
 
 class SettingOption extends StatefulWidget {
-  String text;
-  Color textColor;
-//NOTE: the [] in the constructors indicate that the parameter is optional
-  SettingOption(this.text, this.textColor, {super.key});
+  final String text;
+  final Color textColor;
+  const SettingOption(this.text, this.textColor, {super.key});
   @override
   State<StatefulWidget> createState() {
     // ignore: no_logic_in_create_state

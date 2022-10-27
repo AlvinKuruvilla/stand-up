@@ -11,7 +11,7 @@ class AuthAPI extends BaseAPI {
       'password': password,
     };
     var body = jsonEncode(userData);
-    print("Sent Body:" + body);
+    // print("Sent Body:" + body);
     http.Response response = await http.post(Uri.parse(super.authPath),
         headers: super.headers, body: body);
     return response;
@@ -20,30 +20,28 @@ class AuthAPI extends BaseAPI {
   Future<List> login(String username, String password) async {
     bool userFound = false;
     String parsedUsername = "";
-    print("Parameter username:$username");
-    print("Parameter password: $password");
+    // print("Parameter username:$username");
+    // print("Parameter password: $password");
     http.Response response =
         await http.get(Uri.parse(super.allUsers), headers: super.headers);
-    print("Response Body:${response.body}");
+    // print("Response Body:${response.body}");
     List<dynamic> data = jsonDecode(response.body);
-    data.forEach((element) {
+    for (var element in data) {
       String parsedPassword = element["password"];
       parsedUsername = element["username"];
-      String email = element["email"];
-      print("Email:$email");
-      print("Parsed Password:$parsedPassword");
-      print("Parsed username:$parsedUsername");
-      print("Username Equality Check");
-      print(username == parsedUsername);
-      print("Password Equality Check");
-      print(password == parsedPassword);
+      // print("Parsed Password:$parsedPassword");
+      // print("Parsed username:$parsedUsername");
+      // print("Username Equality Check");
+      // print(username == parsedUsername);
+      // print("Password Equality Check");
+      // print(password == parsedPassword);
       if (parsedPassword.trim() == password.trim() &&
           parsedUsername.trim() == username.trim()) {
-        print("User instantiated!!");
+        // print("User instantiated!!");
         userFound = true;
-        print("User Found is: $userFound");
+        // print("User Found is: $userFound");
       }
-    });
+    }
     return Future.value([userFound, parsedUsername]);
   }
 }
