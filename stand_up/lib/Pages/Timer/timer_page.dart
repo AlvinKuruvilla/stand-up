@@ -31,7 +31,7 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InProgressPage()));
+                          builder: (context) => const InProgressPage()));
                 },
               ),
               ListTile(
@@ -41,7 +41,7 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => InProgressPage()));
+                          builder: (context) => const InProgressPage()));
                 },
               ),
               ListTile(

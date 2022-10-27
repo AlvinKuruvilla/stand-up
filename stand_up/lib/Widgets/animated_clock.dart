@@ -39,13 +39,13 @@ class _CountDownTimerState extends State<CountDownTimer>
             return Stack(
               children: <Widget>[
                 Padding(
-                  padding: const EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(60.0),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: <Widget>[
                       Expanded(
                         child: Align(
-                          alignment: FractionalOffset.center,
+                          alignment: FractionalOffset.topCenter,
                           child: AspectRatio(
                             aspectRatio: 1.0,
                             child: Stack(

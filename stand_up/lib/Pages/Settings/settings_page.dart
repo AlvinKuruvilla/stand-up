@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:stand_up/Pages/Settings/notifications_page.dart';
-import 'package:stand_up/Widgets/hierarchy_button.dart';
 import 'package:stand_up/Widgets/settings_group.dart';
 
 class SettingsPage extends StatefulWidget {
@@ -64,16 +63,24 @@ class SettingsPageState extends State<SettingsPage> {
                                   vertical: 8.0,
                                   horizontal: 0,
                                 ),
-                                child: HierarchyButton(
-                                  "Notifications and Sounds",
-                                  () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                      return const NotificationsPage();
-                                    }));
+                                child: ListTile(
+                                  trailing: const Icon(
+                                    Icons.arrow_right,
+                                    color: Colors.black,
+                                  ),
+                                  title: const Text(
+                                    "Notifications and Sound",
+                                    style: TextStyle(color: Colors.black),
+                                  ),
+                                  onTap: () {
+                                    Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                            builder: (context) =>
+                                                const NotificationsPage()));
                                   },
                                 ),
-                              ),
+                              )
                             ],
                           ),
                         ),
