@@ -20,6 +20,7 @@ class SettingsPageState extends State<SettingsPage> {
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
+          iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
           title: const Text(
             'User Settings',
