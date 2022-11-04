@@ -26,7 +26,6 @@ class _TimerPageState extends State<TimerPage> {
             padding: EdgeInsets.zero,
             children: [
               UserAccountsDrawerHeader(
-                decoration: const BoxDecoration(color: Colors.lightBlue),
                 accountName: Text(
                   UserAccount().username,
                   style: const TextStyle(

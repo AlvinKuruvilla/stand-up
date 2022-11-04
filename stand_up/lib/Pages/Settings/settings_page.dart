@@ -22,7 +22,8 @@ class SettingsPageState extends State<SettingsPage> {
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
-          backgroundColor: Colors.white,
+          backgroundColor: Colors.transparent,
+          elevation: 0,
           title: const Text('Settings'),
         ),
         body: SettingsList(platform: selectedPlatform, sections: [
