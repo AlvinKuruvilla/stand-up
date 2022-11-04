@@ -16,8 +16,15 @@ class MyApp extends StatefulWidget {
 class _MyAppState extends State<MyApp> {
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
-      home: LoginPage(),
+    return MaterialApp(
+      home: const LoginPage(),
+      debugShowCheckedModeBanner: false,
+      theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: const ColorScheme.light()),
+      darkTheme: ThemeData(
+          scaffoldBackgroundColor: Colors.grey.shade900,
+          colorScheme: const ColorScheme.dark()),
     );
   }
 }

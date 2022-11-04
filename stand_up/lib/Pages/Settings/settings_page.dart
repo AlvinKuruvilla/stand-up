@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Pages/Settings/notifications_page.dart';
-import 'package:stand_up/Widgets/settings_group.dart';
+import 'package:settings_ui/settings_ui.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -15,6 +14,8 @@ class SettingsPageState extends State<SettingsPage> {
     super.initState();
   }
 
+  DevicePlatform selectedPlatform = DevicePlatform.device;
+  bool useCustomTheme = false;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,81 +23,45 @@ class SettingsPageState extends State<SettingsPage> {
         appBar: AppBar(
           iconTheme: const IconThemeData(color: Colors.black),
           backgroundColor: Colors.white,
-          title: const Text(
-            'User Settings',
-          ),
+          title: const Text('Settings'),
         ),
-        body: SingleChildScrollView(
-            padding: const EdgeInsets.all(16.0),
-            child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: <Widget>[
-                  SettingsGroup(
-                    title: "ACCOUNT",
-                  ),
-                  Card(
-                      elevation: 0.5,
-                      margin: const EdgeInsets.symmetric(
-                        vertical: 4.0,
-                        horizontal: 0,
-                      ),
-                      child: Column(children: <Widget>[
-                        const ListTile(
-                          leading: CircleAvatar(
-                            child: Text("AK"),
-                          ),
-                        ),
-                        buildDivider(),
-                        Card(
-                          elevation: 0.5,
-                          margin: const EdgeInsets.symmetric(
-                            vertical: 4.0,
-                            horizontal: 0,
-                          ),
-                          child: Column(
-                            children: <Widget>[
-                              const SizedBox(height: 10.0),
-                              SettingsGroup(
-                                title: "PRIVACY AND NOTIFICATIONS",
-                              ),
-                              Card(
-                                margin: const EdgeInsets.symmetric(
-                                  vertical: 8.0,
-                                  horizontal: 0,
-                                ),
-                                child: ListTile(
-                                  trailing: const Icon(
-                                    Icons.arrow_right,
-                                    color: Colors.black,
-                                  ),
-                                  title: const Text(
-                                    "Notifications and Sound",
-                                    style: TextStyle(color: Colors.black),
-                                  ),
-                                  onTap: () {
-                                    Navigator.push(
-                                        context,
-                                        MaterialPageRoute(
-                                            builder: (context) =>
-                                                const NotificationsPage()));
-                                  },
-                                ),
-                              )
-                            ],
-                          ),
-                        ),
-                      ]))
-                ])));
+        body: SettingsList(platform: selectedPlatform, sections: [
+          SettingsSection(
+            title: const Text('Appearance'),
+            tiles: <SettingsTile>[
+              SettingsTile.switchTile(
+                onToggle: (value) {
+                  setState(() {
+                    useCustomTheme = value;
+                  });
+                },
+                initialValue: useCustomTheme,
+                leading: const Icon(Icons.format_paint),
+                title: const Text('Dark Mode'),
+              ),
+            ],
+          ),
+          SettingsSection(
+            title: const Text('Application Notifications'),
+            tiles: <SettingsTile>[
+              SettingsTile.switchTile(
+                onToggle: (_) {},
+                initialValue: true,
+                leading: const Icon(Icons.timer),
+                title: const Text('Enable timer notifications'),
+                description: const Text(
+                    "Timer notifications are sent for when a standing session finishes"),
+              ),
+              SettingsTile.switchTile(
+                onToggle: (_) {},
+                initialValue: true,
+                leading: const Icon(Icons.notifications_active),
+                title: const Text('Enable calendar notifications'),
+                description: const Text(
+                    'Calendar notifications are sent 5 minutes before a scheduled standing session begins'),
+              ),
+            ],
+          ),
+        ]));
   }
-}
-
-Container buildDivider() {
-  return Container(
-    margin: const EdgeInsets.symmetric(
-      horizontal: 8.0,
-    ),
-    width: double.infinity,
-    height: 1.0,
-    color: Colors.grey.shade300,
-  );
 }
