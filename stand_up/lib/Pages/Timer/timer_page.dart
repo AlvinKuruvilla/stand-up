@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/animated_clock.dart';
 import 'package:stand_up/Widgets/in_progress.dart';
@@ -24,6 +25,25 @@ class _TimerPageState extends State<TimerPage> {
           child: ListView(
             padding: EdgeInsets.zero,
             children: [
+              UserAccountsDrawerHeader(
+                decoration: const BoxDecoration(color: Colors.lightBlue),
+                accountName: Text(
+                  UserAccount().username,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                accountEmail: Text(
+                  UserAccount().email,
+                  style: const TextStyle(
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                currentAccountPicture: const CircleAvatar(
+                  backgroundImage:
+                      NetworkImage("https://i.lensdump.com/i/ZVFKLm.png"),
+                ),
+              ),
               ListTile(
                 leading: const Icon(Icons.edit_calendar),
                 title: const Text("Calendar"),

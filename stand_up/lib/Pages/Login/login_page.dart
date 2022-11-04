@@ -98,11 +98,10 @@ class _LoginPageState extends State<LoginPage> {
                     var ret = await _authAPI.login(email, password);
                     var found = ret[0];
                     var username = ret[1];
-                    // print(req.body);
-                    // print("User found:$found");
+                    var parsedEmail = ret[2];
                     if (found) {
-                      var account =
-                          UserAccount.instantiate(email, username, password);
+                      var account = UserAccount.instantiate(
+                          parsedEmail, username, password);
                       account.printAttributes();
                       Navigator.push(
                           context,

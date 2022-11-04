@@ -20,6 +20,7 @@ class AuthAPI extends BaseAPI {
   Future<List> login(String username, String password) async {
     bool userFound = false;
     String parsedUsername = "";
+    String extractedEmail = "";
     // print("Parameter username:$username");
     // print("Parameter password: $password");
     http.Response response =
@@ -29,6 +30,7 @@ class AuthAPI extends BaseAPI {
     for (var element in data) {
       String parsedPassword = element["password"];
       parsedUsername = element["username"];
+      extractedEmail = element["email"];
       // print("Parsed Password:$parsedPassword");
       // print("Parsed username:$parsedUsername");
       // print("Username Equality Check");
@@ -42,6 +44,6 @@ class AuthAPI extends BaseAPI {
         // print("User Found is: $userFound");
       }
     }
-    return Future.value([userFound, parsedUsername]);
+    return Future.value([userFound, parsedUsername, extractedEmail]);
   }
 }
