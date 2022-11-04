@@ -3,6 +3,7 @@ import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Login/register_page.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
 import 'package:stand_up/Services/auth_api.dart';
+import 'package:stand_up/Widgets/error_flash_message.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});
@@ -107,10 +108,19 @@ class _LoginPageState extends State<LoginPage> {
                           context,
                           MaterialPageRoute(
                               builder: (context) => const TimerPage()));
-                    } else {}
-                    // ignore: unused_catch_clause
+                    } else {
+                      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                          content: ErrorFlashMessage(
+                        errorText: "Email or Password is Incorrect",
+                        title: "Oh Nose! Login Failed!",
+                      )));
+                    }
                   } on Exception catch (e) {
-                    // print(e.toString());
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: ErrorFlashMessage(
+                      errorText: "Unable to connect to server",
+                      title: "Oh Nose! Internal Server Error!",
+                    )));
                   }
                 }
               },
