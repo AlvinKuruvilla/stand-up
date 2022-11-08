@@ -3,7 +3,7 @@ import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Login/register_page.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
 import 'package:stand_up/Services/auth_api.dart';
-import 'package:stand_up/Widgets/error_flash_message.dart';
+import 'package:stand_up/Widgets/Utilities/error_flash_message.dart';
 
 class LoginPage extends StatefulWidget {
   const LoginPage({super.key});

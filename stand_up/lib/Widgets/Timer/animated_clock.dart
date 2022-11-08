@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:stand_up/Widgets/timer_painter.dart';
+import 'package:stand_up/Widgets/Timer/timer_painter.dart';
 
 // TODO: The pause button does not turn back into a play button when pressed
 // TODO: Add functionality to reset the timer when a session is started
