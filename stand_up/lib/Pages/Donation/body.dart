@@ -58,23 +58,18 @@ class ItemInfo extends StatelessWidget {
           DonateButton(
             size: size,
             press: () {},
-          )
-          //TODO: Add some learn more text here that links to the foundation website
+          ),
+          _learnMore(context)
         ],
       ),
     );
   }
 
-  Row shopeName({required String name}) {
+  _learnMore(context) {
     return Row(
-      children: <Widget>[
-        const Icon(
-          Icons.location_on,
-          color: Color(0xFFB5BFD0),
-        ),
-        const SizedBox(width: 10),
-        Text(name),
-      ],
+      mainAxisAlignment: MainAxisAlignment.center,
+      //TODO: Add url launcher support
+      children: [TextButton(onPressed: () {}, child: const Text("Learn More"))],
     );
   }
 }
