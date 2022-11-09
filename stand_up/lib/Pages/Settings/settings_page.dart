@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:settings_ui/settings_ui.dart';
+import 'package:stand_up/Widgets/Utilities/theme_provider.dart';
 
 class SettingsPage extends StatefulWidget {
   const SettingsPage({super.key});
@@ -18,6 +20,7 @@ class SettingsPageState extends State<SettingsPage> {
   bool useCustomTheme = false;
   @override
   Widget build(BuildContext context) {
+    final themeProvider = Provider.of<ThemeProvider>(context);
     return Scaffold(
         backgroundColor: Colors.grey.shade200,
         appBar: AppBar(
@@ -34,6 +37,9 @@ class SettingsPageState extends State<SettingsPage> {
                 onToggle: (value) {
                   setState(() {
                     useCustomTheme = value;
+                    final provider =
+                        Provider.of<ThemeProvider>(context, listen: false);
+                    provider.toggleTheme(value);
                   });
                 },
                 initialValue: useCustomTheme,
