@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:overlay_support/overlay_support.dart';
@@ -27,28 +29,30 @@ class _CountDownTimerState extends State<CountDownTimer>
 
   void notify() {
     if (countText == '0:00:00') {
-      showOverlayNotification((context) {
-        return Card(
-          margin: const EdgeInsets.symmetric(horizontal: 4),
-          child: SafeArea(
-            child: ListTile(
-              leading: SizedBox.fromSize(
-                  size: const Size(40, 40),
-                  child: ClipOval(
-                      child: Container(
-                    color: Colors.black,
-                  ))),
-              title: const Text('Standup'),
-              subtitle: const Text('Your standing session has finished!'),
-              trailing: IconButton(
-                  icon: const Icon(Icons.close),
-                  onPressed: () {
-                    OverlaySupportEntry.of(context)?.dismiss();
-                  }),
+      Timer(const Duration(seconds: 1), () {
+        showOverlayNotification((context) {
+          return Card(
+            margin: const EdgeInsets.symmetric(horizontal: 4),
+            child: SafeArea(
+              child: ListTile(
+                leading: SizedBox.fromSize(
+                    size: const Size(40, 40),
+                    child: ClipOval(
+                        child: Container(
+                      color: Colors.black,
+                    ))),
+                title: const Text('Standup'),
+                subtitle: const Text('Your standing session has finished!'),
+                trailing: IconButton(
+                    icon: const Icon(Icons.close),
+                    onPressed: () {
+                      OverlaySupportEntry.of(context)?.dismiss();
+                    }),
+              ),
             ),
-          ),
-        );
-      }, duration: const Duration(milliseconds: 4000));
+          );
+        }, duration: const Duration(milliseconds: 4000));
+      });
     }
   }
 
