@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "912435335334",
+    "project_id": "stand-up-a955f",
+    "storage_bucket": "stand-up-a955f.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:912435335334:android:ccc64cab76e72a53462467",
+        "android_client_info": {
+          "package_name": "com.akuruvilla.standup"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "912435335334-iof22cuulj55capu5llju9meca3bh5ge.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCfGmHA40bzqPULpEIEyRWz-UfXf4hTWUs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "912435335334-iof22cuulj55capu5llju9meca3bh5ge.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "912435335334-g6bjcfgccmg774ik8h0kdg5a0rvp6tgv.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.standUp"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

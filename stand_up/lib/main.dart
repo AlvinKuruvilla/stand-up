@@ -1,9 +1,16 @@
 import 'package:flutter/material.dart';
+import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'package:stand_up/Pages/Login/login_page.dart';
 import 'package:stand_up/Widgets/Utilities/theme_provider.dart';
+import 'package:firebase_core/firebase_core.dart';
 
-void main() {
+import 'firebase_options.dart';
+
+Future<void> main() async {
+  await Firebase.initializeApp(
+    options: DefaultFirebaseOptions.currentPlatform,
+  );
   runApp(const MyApp());
 }
 
@@ -21,7 +28,8 @@ class _MyAppState extends State<MyApp> {
       create: (context) => ThemeProvider(),
       builder: (context, _) {
         {
-          return MaterialApp(
+          return OverlaySupport(
+              child: MaterialApp(
             home: const LoginPage(),
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.system,
@@ -31,7 +39,7 @@ class _MyAppState extends State<MyApp> {
             darkTheme: ThemeData(
                 scaffoldBackgroundColor: Colors.grey.shade900,
                 colorScheme: const ColorScheme.dark()),
-          );
+          ));
         }
       });
 }
