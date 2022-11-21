@@ -1,6 +1,12 @@
+import 'dart:ui';
+
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
+import 'package:stand_up/Pages/Donation/donation_page.dart';
 import 'package:stand_up/Pages/Login/login_page.dart';
 import 'package:stand_up/Widgets/Utilities/theme_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
@@ -8,6 +14,12 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
+  if (!kIsWeb) {
+    WidgetsFlutterBinding.ensureInitialized();
+    DartPluginRegistrant.ensureInitialized();
+    Stripe.publishableKey =
+        "pk_test_51M2KJ9Dmv0tllYfEngNWe1pW85Bw6dPSmD3TEDnjx8t7HwWoNMA1wC4QBiG5PRjnmUyZWTXgzYJmLf2tmeplhOxZ00L33Nd8c1";
+  }
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
@@ -24,13 +36,20 @@ class MyApp extends StatefulWidget {
 
 class _MyAppState extends State<MyApp> {
   @override
+  void initState() {
+    super.initState();
+
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
+  }
+
+  @override
   Widget build(BuildContext context) => ChangeNotifierProvider(
       create: (context) => ThemeProvider(),
       builder: (context, _) {
         {
           return OverlaySupport(
               child: MaterialApp(
-            home: const LoginPage(),
+            home: !kIsWeb ? const DonationPage() : const LoginPage(),
             debugShowCheckedModeBanner: false,
             themeMode: ThemeMode.system,
             theme: ThemeData(
