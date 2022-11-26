@@ -5,6 +5,8 @@ import 'package:stand_up/Objects/event.dart';
 import 'package:stand_up/Widgets/Calendar/event_provider.dart';
 
 class EventEditorPage extends StatefulWidget {
+  // TODO: Add support for a description field
+  // TODO: Save and load these events from a database
   final Event? event;
   const EventEditorPage({super.key, this.event});
   @override
