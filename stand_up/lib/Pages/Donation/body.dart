@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:stand_up/Widgets/Donation/donate_button.dart';
 import 'package:stand_up/Widgets/Donation/item_image.dart';
 import 'package:stand_up/Widgets/Donation/title_widget.dart';
 import 'package:http/http.dart' as http;
