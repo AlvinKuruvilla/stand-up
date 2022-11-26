@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Donation/donation_page.dart';
 import 'package:stand_up/Pages/Settings/settings_page.dart';
+import 'package:stand_up/Widgets/Calendar/calendar.dart';
 import 'package:stand_up/Widgets/Timer/animated_clock.dart';
 import 'package:stand_up/Widgets/Utilities/in_progress.dart';
 
@@ -51,7 +52,7 @@ class _TimerPageState extends State<TimerPage> {
                   Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const InProgressPage()));
+                          builder: (context) => const CalendarWidget()));
                 },
               ),
               ListTile(

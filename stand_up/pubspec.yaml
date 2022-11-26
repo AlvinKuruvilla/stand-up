@@ -44,6 +44,7 @@ dependencies:
   overlay_support: ^2.1.0
   intl: ^0.17.0
   flutter_stripe: ^7.0.0
+  syncfusion_flutter_calendar: ^20.3.58
 dev_dependencies:
   flutter_test:
     sdk: flutter
