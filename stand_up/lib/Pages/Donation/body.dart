@@ -1,10 +1,12 @@
 import 'dart:convert';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stand_up/Widgets/Donation/item_image.dart';
 import 'package:stand_up/Widgets/Donation/title_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
+import 'package:stand_up/Widgets/Utilities/error_flash_message.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -71,7 +73,16 @@ class ItemInfo extends StatelessWidget {
               color: Colors.transparent,
               child: InkWell(
                 onTap: () async {
-                  makePayment(context);
+                  if (!kIsWeb) {
+                    makePayment(context);
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                        content: ErrorFlashMessage(
+                      errorText:
+                          "The stripe flutter plugin is not supported on web yet",
+                      title: "Oh Nose! Stripe Payment Unsupported!",
+                    )));
+                  }
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(20.0),
@@ -164,7 +175,7 @@ class ItemInfo extends StatelessWidget {
                             Icons.check_circle,
                             color: Colors.green,
                           ),
-                          Text("Payment Successfull"),
+                          Text("Payment Successful"),
                         ],
                       ),
                     ],
