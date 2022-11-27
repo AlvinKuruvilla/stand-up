@@ -10,6 +10,7 @@ import 'package:stand_up/Pages/Donation/donation_page.dart';
 import 'package:stand_up/Pages/Login/login_page.dart';
 import 'package:stand_up/Widgets/Calendar/event_provider.dart';
 import 'package:firebase_core/firebase_core.dart';
+import 'package:stand_up/config.dart';
 
 import 'firebase_options.dart';
 
@@ -49,7 +50,7 @@ class _MyAppState extends State<MyApp> {
           child: MaterialApp(
         home: !kIsWeb ? const DonationPage() : const LoginPage(),
         debugShowCheckedModeBanner: false,
-        themeMode: ThemeMode.system,
+        themeMode: themeProvider.currentTheme(),
         theme: ThemeData(
             scaffoldBackgroundColor: Colors.white,
             colorScheme: const ColorScheme.light()),
