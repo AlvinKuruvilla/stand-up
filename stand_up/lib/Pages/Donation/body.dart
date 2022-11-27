@@ -7,6 +7,7 @@ import 'package:stand_up/Widgets/Donation/title_widget.dart';
 import 'package:http/http.dart' as http;
 import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:stand_up/Widgets/Utilities/error_flash_message.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Body extends StatelessWidget {
   const Body({super.key});
@@ -119,7 +120,22 @@ class ItemInfo extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
       //TODO: Add url launcher support
-      children: [TextButton(onPressed: () {}, child: const Text("Learn More"))],
+      children: [
+        TextButton(
+            onPressed: () async {
+              const url = "https://www.theorthopedicfoundation.com/";
+              if (await canLaunchUrl(Uri.parse(url))) {
+                await launchUrl(Uri.parse(url));
+              } else {
+                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: ErrorFlashMessage(
+                  errorText: "Could not launch the provided url",
+                  title: "Oh Nose! Failed to launch url!",
+                )));
+              }
+            },
+            child: const Text("Learn More"))
+      ],
     );
   }
 
