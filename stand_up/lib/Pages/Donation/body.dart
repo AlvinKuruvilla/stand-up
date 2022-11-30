@@ -119,7 +119,6 @@ class ItemInfo extends StatelessWidget {
   _learnMore(context) {
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,
-      //TODO: Add url launcher support
       children: [
         TextButton(
             onPressed: () async {
@@ -197,8 +196,6 @@ class ItemInfo extends StatelessWidget {
                     ],
                   ),
                 ));
-        // ScaffoldMessenger.of(context).showSnackBar(const SnackBar(content: Text("paid successfully")));
-
         paymentIntent = null;
       }).onError((error, stackTrace) {
         print('Error is:--->$error $stackTrace');

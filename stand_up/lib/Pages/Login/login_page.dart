@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Login/register_page.dart';
@@ -95,14 +98,17 @@ class _LoginPageState extends State<LoginPage> {
             ElevatedButton(
               onPressed: () async {
                 if (key.currentState!.validate()) {
+                  var bytes = utf8.encode(password);
+                  var hash = sha256.convert(bytes).toString();
+                  print("Hashed password:" + hash);
                   try {
-                    var ret = await _authAPI.login(email, password);
+                    var ret = await _authAPI.login(email, hash);
                     var found = ret[0];
                     var username = ret[1];
                     var parsedEmail = ret[2];
                     if (found) {
-                      var account = UserAccount.instantiate(
-                          parsedEmail, username, password);
+                      var account =
+                          UserAccount.instantiate(parsedEmail, username, hash);
                       account.printAttributes();
                       Navigator.push(
                           context,

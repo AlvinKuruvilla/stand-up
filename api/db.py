@@ -106,6 +106,7 @@ def get_users():
             users.append(user)
 
     except:
+        print("Exception encountered when retrieving users")
         users = []
 
     return users

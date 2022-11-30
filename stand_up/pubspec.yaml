@@ -46,6 +46,7 @@ dependencies:
   flutter_stripe: ^7.0.0
   syncfusion_flutter_calendar: ^20.3.58
   url_launcher: ^6.1.7
+  crypto: ^3.0.2
 dev_dependencies:
   flutter_test:
     sdk: flutter

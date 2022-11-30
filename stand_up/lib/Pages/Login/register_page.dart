@@ -1,3 +1,6 @@
+import 'dart:convert';
+
+import 'package:crypto/crypto.dart';
 import 'package:flutter/material.dart';
 import 'package:stand_up/Objects/user_account.dart';
 import 'package:stand_up/Pages/Timer/timer_page.dart';
@@ -122,8 +125,12 @@ class _RegisterPageState extends State<RegisterPage> {
           ElevatedButton(
             onPressed: () async {
               if (key.currentState!.validate()) {
+                var bytes = utf8.encode(password);
+                var hash = sha256.convert(bytes).toString();
+                print("Hashed password:" + hash);
+
                 try {
-                  var req = await _authAPI.signUp(email, password, username);
+                  var req = await _authAPI.signUp(username, email, hash);
                   if (req.statusCode == 200) {
                     // print(req.body);
                     var account = UserAccount.fromRequestBody(req.body);

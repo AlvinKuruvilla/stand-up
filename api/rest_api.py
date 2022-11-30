@@ -1,14 +1,18 @@
+import hashlib
 from db import create_db_table, get_user_by_email, insert_user, get_users
 from flask import Flask, request, jsonify
 from flask_cors import CORS
 
 users = []
+string = "Test123!"
+hash = hashlib.sha256(string.encode()).hexdigest()
 test_user = {
     "username": "jdoe",
     "email": "johndoe@gamil.com",
-    "password": "Test123!",
+    "password": hash,
 }
 users.append(test_user)
+
 create_db_table()
 
 for i in users:
@@ -32,3 +36,4 @@ if __name__ == "__main__":
     #app.debug = True
     #app.run(debug=True)
     app.run()
+    print(get_users())

@@ -21,18 +21,18 @@ class AuthAPI extends BaseAPI {
     bool userFound = false;
     String parsedUsername = "";
     String extractedEmail = "";
-    // print("Parameter username:$username");
-    // print("Parameter password: $password");
+    print("Parameter username:$username");
+    print("Parameter password: $password");
     http.Response response =
         await http.get(Uri.parse(super.allUsers), headers: super.headers);
-    // print("Response Body:${response.body}");
+    print("Response Body:${response.body}");
     List<dynamic> data = jsonDecode(response.body);
     for (var element in data) {
       String parsedPassword = element["password"];
       parsedUsername = element["username"];
       extractedEmail = element["email"];
-      // print("Parsed Password:$parsedPassword");
-      // print("Parsed username:$parsedUsername");
+      print("Parsed Password:$parsedPassword");
+      print("Parsed username:$parsedUsername");
       // print("Username Equality Check");
       // print(username == parsedUsername);
       // print("Password Equality Check");
