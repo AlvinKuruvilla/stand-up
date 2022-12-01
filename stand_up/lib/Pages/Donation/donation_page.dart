@@ -12,7 +12,7 @@ class DonationPage extends StatelessWidget {
       backgroundColor: kPrimaryColor,
       appBar: AppBar(
         elevation: 0,
-        backgroundColor: Colors.blueAccent,
+        backgroundColor: Colors.purple,
         leading: IconButton(
           icon: const Icon(
             Icons.arrow_back,
