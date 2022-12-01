@@ -12,7 +12,7 @@ class Body extends StatelessWidget {
       child: Column(
         children: <Widget>[
           ItemImage(),
-          Expanded(
+          const Expanded(
             child: ItemInfo(),
           ),
         ],
@@ -23,7 +23,7 @@ class Body extends StatelessWidget {
 
 // ignore: must_be_immutable
 class ItemInfo extends StatelessWidget {
-  ItemInfo({
+  const ItemInfo({
     Key? key,
   }) : super(key: key);
 
