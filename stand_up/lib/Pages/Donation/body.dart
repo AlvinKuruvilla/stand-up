@@ -1,11 +1,5 @@
-import 'dart:convert';
-
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:stand_up/Widgets/Donation/item_image.dart';
-import 'package:stand_up/Widgets/Donation/title_widget.dart';
-import 'package:http/http.dart' as http;
-import 'package:flutter_stripe/flutter_stripe.dart';
 import 'package:stand_up/Widgets/Utilities/error_flash_message.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -14,10 +8,10 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.blueAccent,
+      color: Colors.white,
       child: Column(
         children: <Widget>[
-          const ItemImage(),
+          ItemImage(),
           Expanded(
             child: ItemInfo(),
           ),
@@ -29,218 +23,134 @@ class Body extends StatelessWidget {
 
 // ignore: must_be_immutable
 class ItemInfo extends StatelessWidget {
-  Map<String, dynamic>? paymentIntent;
   ItemInfo({
     Key? key,
   }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
-    Size size = MediaQuery.of(context).size;
+    const double kDefaultPadding = 30.0;
     return Container(
-      padding: const EdgeInsets.all(20),
-      width: double.infinity,
-      decoration: const BoxDecoration(
-        color: Colors.white,
-        borderRadius: BorderRadius.only(
-          topLeft: Radius.circular(30),
-          topRight: Radius.circular(30),
-        ),
-      ),
+      padding: const EdgeInsets.all(10),
       child: Column(
-        children: <Widget>[
-          const TitleWidget(
-            name: "The Orthopedic Foundation",
-          ),
-          const Center(
-            child: Text(
-              "The Orthopedic Foundation is a charitable organization dedicated to improving the quality of patient care and medical services through a commitment to research, education and prevention of orthopedic and neurologic disorders.",
-              style: TextStyle(
-                height: 1.5,
-              ),
-            ),
-          ),
-          SizedBox(height: size.height * 0.1),
-          // Free space  10% of total height
-          Container(
-            // padding: EdgeInsets.all(20),
-            width: size.width * 0.8,
-            // it will cover 80% of total width
-            decoration: BoxDecoration(
-              color: const Color(0xFFFFC61F),
-              borderRadius: BorderRadius.circular(10),
-            ),
-            child: Material(
-              color: Colors.transparent,
-              child: InkWell(
-                onTap: () async {
-                  if (!kIsWeb) {
-                    makePayment(context);
-                  } else {
-                    ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                        content: ErrorFlashMessage(
-                      errorText:
-                          "The stripe flutter plugin is not supported on web yet",
-                      title: "Oh Nose! Stripe Payment Unsupported!",
-                    )));
-                  }
-                },
-                child: Padding(
-                  padding: const EdgeInsets.all(20.0),
-                  child: Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: const <Widget>[
-                      Icon(
-                        Icons.diamond,
-                        color: Colors.white,
-                      ),
-                      SizedBox(width: 10),
-                      Text(
-                        "Donate",
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Container(
+                padding: const EdgeInsets.only(
+                  bottom: kDefaultPadding - 15,
+                ),
+                child: Column(
+                  children: const <Widget>[
+                    Center(
+                      child: Text(
+                        "The Orthopedic Foundation",
                         style: TextStyle(
-                          color: Colors.white,
+                          fontSize: 28.0,
                           fontWeight: FontWeight.bold,
-                          fontSize: 18,
+                          color: Colors.black,
                         ),
-                      )
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: kDefaultPadding - 15,
+                    bottom: kDefaultPadding - 15,
+                  ),
+                  child: Column(
+                    children: const [
+                      Text(
+                        'About',
+                        style: TextStyle(
+                          fontSize: 20.0,
+                          fontWeight: FontWeight.bold,
+                          color: Colors.black,
+                        ),
+                      ),
                     ],
                   ),
                 ),
-              ),
-            ),
-          ),
-
-          _learnMore(context)
-        ],
-      ),
-    );
-  }
-
-  _learnMore(context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.center,
-      children: [
-        TextButton(
-            onPressed: () async {
-              const url = "https://www.theorthopedicfoundation.com/";
-              if (await canLaunchUrl(Uri.parse(url))) {
-                await launchUrl(Uri.parse(url));
-              } else {
-                ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: ErrorFlashMessage(
-                  errorText: "Could not launch the provided url",
-                  title: "Oh Nose! Failed to launch url!",
-                )));
-              }
-            },
-            child: const Text("Learn More"))
-      ],
-    );
-  }
-
-  void toastMessage(context, bool success) {
-    ScaffoldMessenger.of(context)
-      ..removeCurrentSnackBar()
-      ..showSnackBar(
-        SnackBar(
-          content: Container(
-            color: success ? Colors.green : Colors.red,
-            padding: const EdgeInsets.all(10),
-            child: Text(
-              success ? 'Payment Successful' : 'Payment Failed',
-            ),
-          ),
-        ),
-      );
-  }
-
-  Future<void> makePayment(context) async {
-    try {
-      paymentIntent = await createPaymentIntent('10', 'USD');
-      //Payment Sheet
-      await Stripe.instance
-          .initPaymentSheet(
-              paymentSheetParameters: SetupPaymentSheetParameters(
-                  paymentIntentClientSecret: paymentIntent!['client_secret'],
-                  // applePay: const PaymentSheetApplePay(merchantCountryCode: '+92',),
-                  // googlePay: const PaymentSheetGooglePay(testEnv: true, currencyCode: "US", merchantCountryCode: "+92"),
-                  style: ThemeMode.dark,
-                  merchantDisplayName: 'Adnan'))
-          .then((value) {});
-
-      ///now finally display payment sheeet
-      displayPaymentSheet(context);
-    } catch (e, s) {
-      print('exception:$e$s');
-    }
-  }
-
-  displayPaymentSheet(context) async {
-    try {
-      await Stripe.instance.presentPaymentSheet().then((value) {
-        showDialog(
-            context: context,
-            builder: (_) => AlertDialog(
-                  content: Column(
-                    mainAxisSize: MainAxisSize.min,
-                    children: [
-                      Row(
-                        children: const [
-                          Icon(
-                            Icons.check_circle,
-                            color: Colors.green,
-                          ),
-                          Text("Payment Successful"),
-                        ],
+                Container(
+                  padding: const EdgeInsets.only(
+                    top: kDefaultPadding - 15,
+                    bottom: kDefaultPadding - 10,
+                  ),
+                  child: Column(
+                    children: const [
+                      Text(
+                        "The Orthopedic Foundation is a charitable organization dedicated to improving the quality of patient care and medical services through a commitment to research, education and prevention of orthopedic and neurologic disorders.",
+                        style: TextStyle(
+                          fontSize: 16.0,
+                          color: Colors.black,
+                        ),
                       ),
                     ],
                   ),
-                ));
-        paymentIntent = null;
-      }).onError((error, stackTrace) {
-        print('Error is:--->$error $stackTrace');
-      });
-    } on StripeException catch (e) {
-      print('Error is:---> $e');
-      showDialog(
-          context: context,
-          builder: (_) => const AlertDialog(
-                content: Text("Cancelled "),
-              ));
-    } catch (e) {
-      print('$e');
-    }
-  }
-
-  //  Future<Map<String, dynamic>>
-  createPaymentIntent(String amount, String currency) async {
-    try {
-      Map<String, dynamic> body = {
-        'amount': calculateAmount(amount),
-        'currency': currency,
-        'payment_method_types[]': 'card'
-      };
-
-      var response = await http.post(
-        Uri.parse('https://api.stripe.com/v1/payment_intents'),
-        headers: {
-          'Authorization':
-              'Bearer sk_test_51M2KJ9Dmv0tllYfEmLk2tGvFOeoJa8MUOLvWrEk1Ff0qFtk7kEOCSYCE1StFfNy6jtp5oMIvsw8QzIhyXjzLbP7k00W2OxRB1K',
-          'Content-Type': 'application/x-www-form-urlencoded'
-        },
-        body: body,
-      );
-      // ignore: avoid_print
-      print('Payment Intent Body->>> ${response.body.toString()}');
-      return jsonDecode(response.body);
-    } catch (err) {
-      // ignore: avoid_print
-      print('err charging user: ${err.toString()}');
-    }
-  }
-
-  calculateAmount(String amount) {
-    final calculatedAmout = (int.parse(amount)) * 100;
-    return calculatedAmout.toString();
+                ),
+              ]),
+              Container(
+                padding: const EdgeInsets.only(
+                  bottom: kDefaultPadding - 15,
+                ),
+                child: Column(
+                  children: const [
+                    Text(
+                      'Contact',
+                      style: TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                padding: const EdgeInsets.only(
+                  top: kDefaultPadding - 15,
+                  bottom: kDefaultPadding - 15,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: [
+                    const Icon(
+                      Icons.open_in_new,
+                      size: 35,
+                    ),
+                    InkWell(
+                      onTap: () async {
+                        const url = "https://www.theorthopedicfoundation.com/";
+                        if (await canLaunchUrl(Uri.parse(url))) {
+                          await launchUrl(Uri.parse(url));
+                        } else {
+                          ScaffoldMessenger.of(context)
+                              .showSnackBar(const SnackBar(
+                                  content: ErrorFlashMessage(
+                            errorText: "Could not launch the provided url",
+                            title: "Oh Nose! Failed to launch url!",
+                          )));
+                        }
+                      },
+                      child: const Text(
+                        "www.theorthopedicfoundation.com/",
+                        style: TextStyle(
+                          fontSize: 18,
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
   }
 }

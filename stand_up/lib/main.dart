@@ -52,10 +52,12 @@ class _MyAppState extends State<MyApp> {
         debugShowCheckedModeBanner: false,
         themeMode: themeProvider.currentTheme(),
         theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
-            colorScheme: const ColorScheme.light()),
+          scaffoldBackgroundColor: Colors.white,
+          colorScheme: const ColorScheme.light(),
+        ),
         darkTheme: ThemeData(
-            scaffoldBackgroundColor: Colors.grey.shade900,
-            colorScheme: const ColorScheme.dark()),
+          scaffoldBackgroundColor: Colors.grey.shade900,
+          colorScheme: const ColorScheme.dark(),
+        ),
       )));
 }
