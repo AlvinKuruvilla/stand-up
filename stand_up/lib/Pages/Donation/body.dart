@@ -4,6 +4,9 @@ import 'package:stand_up/Widgets/Utilities/error_flash_message.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Body extends StatelessWidget {
+  // TODO: Figure out a bettter way to set the color of the Widget. It currently doesn't respect the theme switching and if we remove the Container
+  // the color is unreadable
+  // Maybe we can access the static variable from the ThemeController to see if it is currently dark or light mode?
   const Body({super.key});
   @override
   Widget build(BuildContext context) {

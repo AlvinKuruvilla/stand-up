@@ -5,7 +5,6 @@ import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/Calendar/calendar.dart';
 import 'package:stand_up/Widgets/Timer/animated_clock.dart';
 import 'package:stand_up/Widgets/Utilities/in_progress.dart';
-import 'package:stand_up/config.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});
@@ -19,9 +18,6 @@ class _TimerPageState extends State<TimerPage> {
   @override
   void initState() {
     super.initState();
-    themeProvider.addListener(() {
-      setState(() {});
-    });
   }
 
   @override
@@ -87,15 +83,7 @@ class _TimerPageState extends State<TimerPage> {
           ],
         ),
       ),
-      backgroundColor: Colors.white,
       body: const CountDownTimer(),
-      floatingActionButton: FloatingActionButton.extended(
-        onPressed: () {
-          themeProvider.toggleTheme();
-        },
-        label: const Text("Switch Theme"),
-        icon: const Icon(Icons.brightness_high),
-      ),
     );
   }
 }

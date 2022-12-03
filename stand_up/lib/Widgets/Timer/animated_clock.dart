@@ -88,7 +88,6 @@ class _CountDownTimerState extends State<CountDownTimer>
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xfff5fbff),
       body: Column(
         children: [
           Expanded(
