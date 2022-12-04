@@ -28,6 +28,8 @@ class _CountDownTimerState extends State<CountDownTimer>
   double progress = 1.0;
 
   void notify() {
+    //TODO: the notification should only be displayed if the user has turned
+    // on timer notifications in the SettingsPage
     if (countText == '0:00:00') {
       Timer(const Duration(seconds: 1), () {
         showOverlayNotification((context) {

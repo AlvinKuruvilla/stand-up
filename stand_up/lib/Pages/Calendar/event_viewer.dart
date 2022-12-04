@@ -26,10 +26,6 @@ class EventViewer extends StatelessWidget {
             style: const TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
           ),
           const SizedBox(height: 24),
-          Text(
-            event.description,
-            style: const TextStyle(fontSize: 18),
-          ),
         ],
       ),
     );

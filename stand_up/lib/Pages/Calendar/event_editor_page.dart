@@ -256,7 +256,6 @@ class _EventEditorPageState extends State<EventEditorPage> {
         title: titleController.text,
         from: fromDate,
         to: toDate,
-        description: "Description",
         isAllDay: false,
       );
       final isEditing = widget.event != null;
