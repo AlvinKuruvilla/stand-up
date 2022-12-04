@@ -58,7 +58,7 @@ class _MyAppState extends State<MyApp> {
                 ],
                 child: OverlaySupport(
                     child: MaterialApp(
-                  home: !kIsWeb ? const DonationPage() : const LoginPage(),
+                  home: !kIsWeb ? DonationPage() : const LoginPage(),
                   debugShowCheckedModeBanner: false,
                   theme: isDarkMode
                       ? ThemeData(

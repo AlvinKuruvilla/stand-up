@@ -64,10 +64,8 @@ class _TimerPageState extends State<TimerPage> {
               leading: const Icon(Icons.money),
               title: const Text("Donate"),
               onTap: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const DonationPage()));
+                Navigator.push(context,
+                    MaterialPageRoute(builder: (context) => DonationPage()));
               },
             ),
             ListTile(
