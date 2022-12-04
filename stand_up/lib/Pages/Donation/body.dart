@@ -11,7 +11,7 @@ class Body extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      // color: Colors.white,
       child: Column(
         children: <Widget>[
           ItemImage(),
@@ -53,7 +53,7 @@ class ItemInfo extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 28.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          // color: Colors.black,
                         ),
                       ),
                     ),
@@ -73,7 +73,7 @@ class ItemInfo extends StatelessWidget {
                         style: TextStyle(
                           fontSize: 20.0,
                           fontWeight: FontWeight.bold,
-                          color: Colors.black,
+                          // color: Colors.black,
                         ),
                       ),
                     ],
@@ -90,7 +90,7 @@ class ItemInfo extends StatelessWidget {
                         "The Orthopedic Foundation is a charitable organization dedicated to improving the quality of patient care and medical services through a commitment to research, education and prevention of orthopedic and neurologic disorders.",
                         style: TextStyle(
                           fontSize: 16.0,
-                          color: Colors.black,
+                          // color: Colors.black,
                         ),
                       ),
                     ],
@@ -108,7 +108,7 @@ class ItemInfo extends StatelessWidget {
                       style: TextStyle(
                         fontSize: 20.0,
                         fontWeight: FontWeight.bold,
-                        color: Colors.black,
+                        // color: Colors.black,
                       ),
                     ),
                   ],

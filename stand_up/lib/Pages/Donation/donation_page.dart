@@ -6,10 +6,7 @@ class DonationPage extends StatelessWidget {
   const DonationPage({super.key});
   @override
   Widget build(BuildContext context) {
-    const kPrimaryColor = Color(0xFF035AA6);
-
     return Scaffold(
-      backgroundColor: kPrimaryColor,
       appBar: AppBar(
         elevation: 0,
         backgroundColor: Colors.purple,
