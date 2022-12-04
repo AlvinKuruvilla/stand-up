@@ -27,6 +27,8 @@ class ThemeController extends StatelessWidget {
   static const keyDarkMode = "key-dark-mode";
   @override
   Widget build(BuildContext context) {
+    // NOTE: The theme switching works when navigating to the settings page for the first time
+    // On subsequent attempts aafter leaving the page, the toggle will move, but the theme will not update
     return SwitchSettingsTile(
       title: "Dark Mode",
       settingKey: keyDarkMode,
@@ -63,7 +65,6 @@ class SettingsPageState extends State<SettingsPage> {
         iconTheme: const IconThemeData(color: Colors.black),
         backgroundColor: Colors.transparent,
         elevation: 0,
-        //TODO: Make the text responsive to the theme see the comment in body.dart for a potential fix
         title: const Text(
           'Settings',
           style: TextStyle(

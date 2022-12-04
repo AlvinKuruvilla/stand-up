@@ -16,7 +16,6 @@ import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
 
 Future<void> main() async {
-  //TODO: Change the default blue color in the dark theme to something else
   if (!kIsWeb) {
     WidgetsFlutterBinding.ensureInitialized();
     DartPluginRegistrant.ensureInitialized();
@@ -26,6 +25,7 @@ Future<void> main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  // TODO: The cache seems to have stopped caching
   await Settings.init(cacheProvider: SharePreferenceCache());
   runApp(const MyApp());
 }

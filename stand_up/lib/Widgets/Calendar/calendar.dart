@@ -11,6 +11,7 @@ class CalendarWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // TODO: The events need to be stored externally somewhere and then be pulled back as an array
     final events = Provider.of<EventProvider>(context).events;
     return Scaffold(
       appBar: AppBar(
