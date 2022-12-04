@@ -61,14 +61,12 @@ class _MyAppState extends State<MyApp> {
                   home: !kIsWeb ? const DonationPage() : const LoginPage(),
                   debugShowCheckedModeBanner: false,
                   theme: isDarkMode
-                      ? ThemeData.dark()
+                      ? ThemeData(
+                          colorScheme: const ColorScheme.dark(),
+                        )
                       : ThemeData(
                           colorScheme: const ColorScheme.light(),
-                        ),
-                  darkTheme: ThemeData(
-                    scaffoldBackgroundColor: Colors.grey.shade900,
-                    colorScheme: const ColorScheme.dark(),
-                  ),
+                          primaryColorDark: Colors.deepPurple),
                 ))));
   }
 }
