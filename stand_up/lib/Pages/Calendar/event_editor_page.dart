@@ -253,6 +253,7 @@ class _EventEditorPageState extends State<EventEditorPage> {
     final isValid = _formKey.currentState!.validate();
     if (isValid) {
       final event = Event(
+        id: UniqueKey(),
         title: titleController.text,
         from: fromDate,
         to: toDate,
