@@ -80,7 +80,7 @@ class _EventEditorPageState extends State<EventEditorPage> {
     return [
       ElevatedButton.icon(
           style: ElevatedButton.styleFrom(
-            backgroundColor: Colors.transparent,
+            backgroundColor: Colors.deepPurpleAccent,
             shadowColor: Colors.transparent,
           ),
           onPressed: saveForm,
