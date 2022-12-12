@@ -127,8 +127,6 @@ class _RegisterPageState extends State<RegisterPage> {
               if (key.currentState!.validate()) {
                 var bytes = utf8.encode(password);
                 var hash = sha256.convert(bytes).toString();
-                print("Hashed password:" + hash);
-
                 try {
                   var req = await _authAPI.signUp(username, email, hash);
                   if (req.statusCode == 200) {
@@ -146,6 +144,7 @@ class _RegisterPageState extends State<RegisterPage> {
                       title: "Oh Nose! Bad Response Code!",
                     )));
                   }
+                  // ignore: unused_catch_clause
                 } on Exception catch (e) {
                   ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                       content: ErrorFlashMessage(

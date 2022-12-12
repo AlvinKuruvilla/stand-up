@@ -1,3 +1,5 @@
+// ignore_for_file: avoid_print
+
 import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
@@ -102,11 +104,9 @@ class DonationPage extends StatelessWidget {
         },
         body: body,
       );
-      // ignore: avoid_print
       print('Payment Intent Body->>> ${response.body.toString()}');
       return jsonDecode(response.body);
     } catch (err) {
-      // ignore: avoid_print
       print('err charging user: ${err.toString()}');
     }
   }

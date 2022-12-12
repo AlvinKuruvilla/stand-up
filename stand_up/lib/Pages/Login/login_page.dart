@@ -100,7 +100,6 @@ class _LoginPageState extends State<LoginPage> {
                 if (key.currentState!.validate()) {
                   var bytes = utf8.encode(password);
                   var hash = sha256.convert(bytes).toString();
-                  print("Hashed password:" + hash);
                   try {
                     var ret = await _authAPI.login(email, hash);
                     var found = ret[0];
@@ -121,6 +120,7 @@ class _LoginPageState extends State<LoginPage> {
                         title: "Oh Nose! Login Failed!",
                       )));
                     }
+                    // ignore: unused_catch_clause
                   } on Exception catch (e) {
                     ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
                         content: ErrorFlashMessage(

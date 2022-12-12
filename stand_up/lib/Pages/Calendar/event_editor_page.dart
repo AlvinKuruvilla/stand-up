@@ -10,6 +10,7 @@ class EventEditorPage extends StatefulWidget {
   final Event? event;
   const EventEditorPage({super.key, this.event});
   @override
+  // ignore: library_private_types_in_public_api
   _EventEditorPageState createState() => _EventEditorPageState();
 }
 

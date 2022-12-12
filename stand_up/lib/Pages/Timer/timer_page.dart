@@ -4,7 +4,6 @@ import 'package:stand_up/Pages/Donation/donation_page.dart';
 import 'package:stand_up/Pages/Settings/settings_page.dart';
 import 'package:stand_up/Widgets/Calendar/calendar.dart';
 import 'package:stand_up/Widgets/Timer/animated_clock.dart';
-import 'package:stand_up/Widgets/Utilities/in_progress.dart';
 
 class TimerPage extends StatefulWidget {
   const TimerPage({super.key});

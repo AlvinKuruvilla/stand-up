@@ -7,6 +7,8 @@ import 'package:syncfusion_flutter_calendar/calendar.dart';
 
 class EventTimeline extends StatefulWidget {
   const EventTimeline({super.key});
+  @override
+  // ignore: library_private_types_in_public_api
   _EventTimelineState createState() => _EventTimelineState();
 }
 
